@@ -34,7 +34,7 @@ def cadastrar_profissional():
     """, (nome, cpf, especialidade, telefone))
     conn.commit()
     conn.close()
-    print("Profissional cadastrado com sucesso!")
+    print("Profissional cadastrado com sucesso! agora é só colocar a mão na massa")
 
 def listar_profissionais():
     conn = conectar()
@@ -44,7 +44,7 @@ def listar_profissionais():
     conn.close()
 
     if not profissionais:
-        print("Nenhum profissional cadastrado.")
+        print("Nenhum profissional cadastrado foi encontrado não.")
     else:
         for p in profissionais:
             print(f"ID: {p[0]} | Nome: {p[1]} | CPF: {p[2]} | Especialidade: {p[3]} | Telefone: {p[4]}")
@@ -59,7 +59,7 @@ def editar_profissional():
     prof = cursor.fetchone()
 
     if not prof:
-        print("Profissional não encontrado.")
+        print("Profissional não encontrado, verificar os dados por favor.")
         conn.close()
         return
 
@@ -90,15 +90,15 @@ def excluir_profissional():
     prof = cursor.fetchone()
 
     if not prof:
-        print("Profissional não encontrado.")
+        print("Profissional não encontrado. Verifique os dados!!!")
         conn.close()
         return
 
-    confirmar = input(f"Tem certeza que deseja excluir {prof[1]}? (s/n): ")
+    confirmar = input(f"Tem certeza ABSOLUTA que deseja excluir {prof[1]}? (s/n): ")
     if confirmar.lower() == 's':
         cursor.execute("DELETE FROM profissionais WHERE id = ?", (id_prof,))
         conn.commit()
-        print("Profissional excluido com sucesso!")
+        print("Profissional excluido com sucesso, -1 na equipe...")
     else:
         print("Operação cancelada.")
     conn.close()
@@ -113,7 +113,7 @@ def menu():
         print("4 - Excluir profissional")
         print("5 - Sair")
 
-        opcao = input("\nEscolha uma opção: ")
+        opcao = input("\nEscolha uma opção por favor: ")
 
         if opcao == "1":
             cadastrar_profissional()
@@ -127,6 +127,6 @@ def menu():
             print("Saindo...")
             break
         else:
-            print("Opção inválida, escolha outra.")
+            print("Opção inválida, escolha outra opção.")
 
 menu()
