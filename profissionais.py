@@ -26,6 +26,9 @@ def cadastrar_profissional():
         cpf = input("CPF: ")
     especialidade = input("Especialidade: ")
     telefone = input("Telefone: ")
+    while len(telefone) < 10 or len(telefone) > 11 or not telefone.isdigit():
+        print("Telefone inválido! Só números, com DDD (10 ou 11 dígitos). Isso que dá só usar passsar o insta...")
+        telefone = input("Telefone: ")
         
 #é especialidade mesmo? agora vai ser
 #PS: se me pedirem mais alguma coisa vou cobrar uma lata monster
