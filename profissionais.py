@@ -145,3 +145,4 @@ def menu():
             print("Opção inválida, escolha outra opção.")
 
 menu()
+#não acredito q escrevi errado "ajeitando"
