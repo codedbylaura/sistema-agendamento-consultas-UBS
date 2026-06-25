@@ -29,16 +29,21 @@ def cadastrar_profissional():
         
 #é especialidade mesmo? agora vai ser
 #PS: se me pedirem mais alguma coisa vou cobrar uma lata monster
-
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute("""
-        INSERT INTO profissionais (nome, cpf, especialidade, telefone)
-        VALUES (?, ?, ?, ?)
-    """, (nome, cpf, especialidade, telefone))
-    conn.commit()
-    conn.close()
-    print("Profissional cadastrado com sucesso! agora é só colocar a mão na massa")
+    try:
+        cursor.execute("""
+            INSERT INTO profissionais (nome, cpf, especialidade, telefone)
+            VALUES (?, ?, ?, ?)
+        """, (nome, cpf, especialidade, telefone))
+        conn.commit()
+        print("Profissional cadastrado com sucesso! agora é só colocar a mão na massa")
+    except sqlite3.IntegrityError:
+        print("Esse CPF já está cadastrado! Não dá pra ter dois iguais... Doppelgänger?")
+    finally:
+        conn.close()
+
+#+1 monster na conta, provavelmente não vão dar D:
 
 def listar_profissionais():
     conn = conectar()
