@@ -21,10 +21,14 @@ def criar_tabela():
 def cadastrar_profissional():
     nome = input("Nome completo: ")
     cpf = input("CPF: ")
+    while len(cpf) != 11 or not cpf.isdigit():
+        print("CPF inválido! Digite apenas e somente os 11 números.")
+        cpf = input("CPF: ")
     especialidade = input("Especialidade: ")
     telefone = input("Telefone: ")
         
 #é especialidade mesmo? agora vai ser
+#PS: se me pedirem mais alguma coisa vou cobrar uma lata monster
 
     conn = conectar()
     cursor = conn.cursor()
