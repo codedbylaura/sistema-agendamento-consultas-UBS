@@ -47,3 +47,4 @@ class Paciente:
             "criado_em": self.criado_em,
             "atualizado_em": self.atualizado_em
         }
+    

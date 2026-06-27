@@ -17,6 +17,7 @@ def conectar():
 
     return conexao
 
+
 # remover depois
 
 if __name__ == "__main__":
