@@ -1,0 +1,251 @@
+{
+    "pacientes": [
+        {
+            "id": "PAC001",
+            "nome": "Maria Silva",
+            "cpf": "123.456.789-00",
+            "data_nasc": "15/03/1990",
+            "nome_pai": "José Silva",
+            "nome_mae": "Ana Silva",
+            "cidade": "São Paulo",
+            "sexo": "Feminino",
+            "raca": "Parda",
+            "telefone": "(11) 98765-4321"
+        },
+        {
+            "id": "PAC002",
+            "nome": "Carlos Souza",
+            "cpf": "987.654.321-00",
+            "data_nasc": "22/07/1985",
+            "nome_pai": "Roberto Souza",
+            "nome_mae": "Lucia Souza",
+            "cidade": "Rio de Janeiro",
+            "sexo": "Masculino",
+            "raca": "Branca",
+            "telefone": "(21) 91234-5678"
+        },
+        {
+            "id": "PAC003",
+            "nome": "Jordan Pereira",
+            "cpf": "456.789.123-00",
+            "data_nasc": "10/11/2000",
+            "nome_pai": "Marcos Pereira",
+            "nome_mae": "Fernanda Pereira",
+            "cidade": "Belo Horizonte",
+            "sexo": "Outro",
+            "raca": "Preta",
+            "telefone": "(31) 99876-5432"
+        },
+        {
+            "id": "PAC004",
+            "nome": "Ana Costa",
+            "cpf": "321.654.987-00",
+            "data_nasc": "05/09/1978",
+            "nome_pai": "Paulo Costa",
+            "nome_mae": "Rita Costa",
+            "cidade": "Curitiba",
+            "sexo": "Feminino",
+            "raca": "Branca",
+            "telefone": "(41) 97654-3210"
+        }
+    ],
+    "profissionais": [
+        {
+            "id": "PRO001",
+            "nome": "Dr. Ricardo Almeida",
+            "cpf": "111.222.333-44",
+            "crm": "CRM/SP 123456",
+            "especialidade": "Clínica Geral",
+            "telefone": "(11) 93333-1111",
+            "email": "ricardo.almeida@clinica.com",
+            "status": "Ativo"
+        },
+        {
+            "id": "PRO002",
+            "nome": "Dra. Beatriz Lima",
+            "cpf": "555.666.777-88",
+            "crm": "CRM/RJ 654321",
+            "especialidade": "Pediatria",
+            "telefone": "(21) 94444-2222",
+            "email": "beatriz.lima@clinica.com",
+            "status": "Ativo"
+        },
+        {
+            "id": "PRO003",
+            "nome": "Dr. Fernando Gomes",
+            "cpf": "999.888.777-66",
+            "crm": "CRM/MG 789012",
+            "especialidade": "Cardiologia",
+            "telefone": "(31) 95555-3333",
+            "email": "fernando.gomes@clinica.com",
+            "status": "Inativo"
+        },
+        {
+            "id": "PRO004",
+            "nome": "laura rocha",
+            "cpf": "987.654.876-67",
+            "crm": "8976",
+            "especialidade": "odonto",
+            "telefone": "(87) 99999-9999",
+            "email": "laura@gmail.com",
+            "status": "Ativo",
+            "endereco": {
+                "rua": "gggg",
+                "bairro": "ffff",
+                "numero": "456"
+            }
+        }
+    ],
+    "consultas": [
+        {
+            "id": "CON001",
+            "id_paciente": "PAC001",
+            "id_profissional": "PRO001",
+            "data": "10/06/2026",
+            "hora": "09:00",
+            "tipo": "Consulta",
+            "especialidade": "Clínica Geral",
+            "status": "Realizada",
+            "queixa_principal": "Dor de cabeça frequente",
+            "diagnostico": "Enxaqueca tensional",
+            "prescricao": "Dipirona 500mg - 1 comprimido a cada 6h se necessário",
+            "observacoes": "Retorno em 30 dias"
+        },
+        {
+            "id": "CON002",
+            "id_paciente": "PAC002",
+            "id_profissional": "PRO003",
+            "data": "12/06/2026",
+            "hora": "14:30",
+            "tipo": "Retorno",
+            "especialidade": "Cardiologia",
+            "status": "Realizada",
+            "queixa_principal": "Palpitações",
+            "diagnostico": "Arritmia leve",
+            "prescricao": "Metoprolol 25mg - 1 comprimido ao dia",
+            "observacoes": "Solicitar ECG de controle"
+        },
+        {
+            "id": "CON003",
+            "id_paciente": "PAC003",
+            "id_profissional": "PRO002",
+            "data": "15/06/2026",
+            "hora": "10:00",
+            "tipo": "Consulta",
+            "especialidade": "Pediatria",
+            "status": "Agendada",
+            "queixa_principal": "Febre e tosse",
+            "diagnostico": "",
+            "prescricao": "",
+            "observacoes": ""
+        },
+        {
+            "id": "CON004",
+            "id_paciente": "PAC004",
+            "id_profissional": "PRO001",
+            "data": "18/06/2026",
+            "hora": "11:00",
+            "tipo": "Consulta",
+            "especialidade": "Clínica Geral",
+            "status": "Cancelada",
+            "queixa_principal": "Exame de rotina",
+            "diagnostico": "",
+            "prescricao": "",
+            "observacoes": "Paciente remarcou para julho"
+        },
+        {
+            "id": "CON005",
+            "id_paciente": "PAC001",
+            "id_profissional": "PRO003",
+            "data": "20/06/2026",
+            "hora": "08:30",
+            "tipo": "Consulta",
+            "especialidade": "Cardiologia",
+            "status": "Realizada",
+            "queixa_principal": "Check-up cardíaco",
+            "diagnostico": "Sem alterações",
+            "prescricao": "Nenhuma",
+            "observacoes": "Retorno anual"
+        }
+    ],
+    "relatorios": {
+        "resumo_geral": {
+            "total_pacientes": 4,
+            "total_profissionais": 3,
+            "profissionais_ativos": 2,
+            "total_consultas": 5
+        },
+        "consultas_por_status": {
+            "Realizadas": 3,
+            "Agendadas": 1,
+            "Canceladas": 1
+        },
+        "consultas_por_especialidade": {
+            "Clínica Geral": 2,
+            "Cardiologia": 2,
+            "Pediatria": 1
+        },
+        "consultas_por_tipo": {
+            "Consulta": 4,
+            "Retorno": 1
+        },
+        "pacientes_por_sexo": {
+            "Feminino": 2,
+            "Masculino": 1,
+            "Outro": 1
+        },
+        "pacientes_por_raca": {
+            "Branca": 2,
+            "Parda": 1,
+            "Preta": 1
+        },
+        "consultas_por_profissional": [
+            {
+                "id_profissional": "PRO001",
+                "nome": "Dr. Ricardo Almeida",
+                "total_consultas": 2,
+                "realizadas": 1,
+                "agendadas": 0,
+                "canceladas": 1
+            },
+            {
+                "id_profissional": "PRO002",
+                "nome": "Dra. Beatriz Lima",
+                "total_consultas": 1,
+                "realizadas": 0,
+                "agendadas": 1,
+                "canceladas": 0
+            },
+            {
+                "id_profissional": "PRO003",
+                "nome": "Dr. Fernando Gomes",
+                "total_consultas": 2,
+                "realizadas": 2,
+                "agendadas": 0,
+                "canceladas": 0
+            }
+        ],
+        "consultas_por_paciente": [
+            {
+                "id_paciente": "PAC001",
+                "nome": "Maria Silva",
+                "total_consultas": 2
+            },
+            {
+                "id_paciente": "PAC002",
+                "nome": "Carlos Souza",
+                "total_consultas": 1
+            },
+            {
+                "id_paciente": "PAC003",
+                "nome": "Jordan Pereira",
+                "total_consultas": 1
+            },
+            {
+                "id_paciente": "PAC004",
+                "nome": "Ana Costa",
+                "total_consultas": 1
+            }
+        ]
+    }
+}
