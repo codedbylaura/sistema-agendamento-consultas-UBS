@@ -1,148 +1,101 @@
-import sqlite3
+import json
+import os
 
-def conectar():
-    return sqlite3.connect("ubs.db")
+profissionais = []
 
-def criar_tabela():
-    conn = conectar()
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS profissionais (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT NOT NULL,
-            cpf TEXT NOT NULL UNIQUE,
-            especialidade TEXT NOT NULL,
-            telefone TEXT NOT NULL
-        )
-    """)
-    conn.commit()
-    conn.close()
+def salvar_json():
+    with open("profissionais.json", "w") as f:
+        json.dump(profissionais, f, indent=4, ensure_ascii=False)
 
-def cadastrar_profissional():
-    nome = input("Nome completo: ")
-    cpf = input("CPF: ")
-    while len(cpf) != 11 or not cpf.isdigit():
-        print("CPF inválido! Digite apenas e somente os 11 números.")
-        cpf = input("CPF: ")
-    especialidade = input("Especialidade: ")
-    telefone = input("Telefone: ")
-    while len(telefone) < 10 or len(telefone) > 11 or not telefone.isdigit():
-        print("Telefone inválido! Só números, com DDD (10 ou 11 dígitos). Isso que dá só usar passsar o insta...")
-        telefone = input("Telefone: ")
-        
-#é especialidade mesmo? agora vai ser
-#PS: se me pedirem mais alguma coisa vou cobrar uma lata monster
+def carregar_json():
+    global profissionais
+    if os.path.exists("profissionais.json"):
+        with open("profissionais.json", "r") as f:
+            profissionais = json.load(f)
 
-    conn = conectar()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM profissionais WHERE cpf = ?", (cpf,))
-    existe = cursor.fetchone()
+carregar_json()
 
-    if existe:
-        print("Esse CPF já está cadastrado! Não dá pra ter dois iguais... Doppelgänger?")
-    else:
-        cursor.execute("""
-            INSERT INTO profissionais (nome, cpf, especialidade, telefone)
-            VALUES (?, ?, ?, ?)
-        """, (nome, cpf, especialidade, telefone))
-        conn.commit()
-        print("Profissional cadastrado com sucesso! agora é só colocar a mão na massa!")
-    conn.close()
-
-#+1 monster na conta, provavelmente não vão dar D:
-
-def listar_profissionais():
-    conn = conectar()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM profissionais")
-    profissionais = cursor.fetchall()
-    conn.close()
-
-    if not profissionais:
-        print("Nenhum profissional cadastrado foi encontrado não.")
-    else:
-        for p in profissionais:
-            print(f"ID: {p[0]} | Nome: {p[1]} | CPF: {p[2]} | Especialidade: {p[3]} | Telefone: {p[4]}")
-
-def editar_profissional():
-    listar_profissionais()
-    id_prof = input("Digite o ID do profissional que deseja editar: ")
-
-    conn = conectar()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM profissionais WHERE id = ?", (id_prof,))
-    prof = cursor.fetchone()
-
-    if not prof:
-        print("Profissional não encontrado, verificar os dados por favor.")
-        conn.close()
-        return
-
-    nome = input(f"Novo nome [{prof[1]}]: ") or prof[1]
-    cpf = input(f"Novo CPF [{prof[2]}]: ") or prof[2]
-    especialidade = input(f"Nova especialidade [{prof[3]}]: ") or prof[3]
-    telefone = input(f"Novo telefone [{prof[4]}]: ") or prof[4]
-
-#mesmo pesquisando eu estou pensando se não tem nada melhor para definir
-#vou deixar assim, vou trocar mais não homi
-
-    cursor.execute("""
-        UPDATE profissionais
-        SET nome=?, cpf=?, especialidade=?, telefone=?
-        WHERE id=?
-    """, (nome, cpf, especialidade, telefone, id_prof))
-    conn.commit()
-    conn.close()
-    print("Profissional atualizado com sucesso! Pronto para atuar")
-
-def excluir_profissional():
-    listar_profissionais()
-    id_prof = input("Digite o ID do profissional que deseja excluir: ")
-
-    conn = conectar()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM profissionais WHERE id = ?", (id_prof,))
-    prof = cursor.fetchone()
-
-    if not prof:
-        print("Profissional não encontrado. Verifique os dados!!!")
-        conn.close()
-        return
-
-    confirmar = input(f"Tem certeza ABSOLUTA que deseja excluir {prof[1]}? (s/n): ")
-    if confirmar.lower() == 's':
-        cursor.execute("DELETE FROM profissionais WHERE id = ?", (id_prof,))
-        conn.commit()
-        print("Profissional excluido com sucesso, -1 na equipe...")
-    else:
-        print("Operação cancelada.")
-    conn.close()
-
-def menu():
-    criar_tabela()
-    while True:
-        print("\n=== CRUD Profissionais - UBS ===")
-        print("1 - Cadastrar profissional")
-        print("2 - Listar profissionais")
-        print("3 - Editar profissional")
-        print("4 - Excluir profissional")
-        print("5 - Sair")
-
-        opcao = input("\nEscolha uma opção por favor: ")
-
-        if opcao == "1":
-            cadastrar_profissional()
-        elif opcao == "2":
-            listar_profissionais()
-        elif opcao == "3":
-            editar_profissional()
-        elif opcao == "4":
-            excluir_profissional()
-        elif opcao == "5":
-            print("Saindo...")
+while True:
+    opcao = int(input("Digite uma opção: \n 1- Cadastrar profissional \n 2- Listar profissionais \n 3- Editar profissional \n 4- Pesquisar profissional \n 5- Excluir profissional \n 6- Relatório \n 7- Sair\n"))
+    match(opcao):
+        case 1:
+            nome = input("Digite o nome do profissional: ")
+            cpf = input("Digite o CPF do profissional: ")
+            registro = input("Digite o registro no conselho: ")
+            especialidade = input("Digite a especialidade: ")
+            telefone = input("Digite o telefone: ")
+            email = input("Digite o e-mail: ")
+            rua = input("Digite a rua: ")
+            bairro = input("Digite o bairro: ")
+            numero = input("Digite o número: ")
+            profissional = {
+                "nome": nome,
+                "cpf": cpf,
+                "registro": registro,
+                "especialidade": especialidade,
+                "telefone": telefone,
+                "email": email,
+                "endereco": {
+                    "rua": rua,
+                    "bairro": bairro,
+                    "numero": numero
+                }
+            }
+            profissionais.append(profissional)
+            salvar_json()
+            print("Profissional cadastrado com sucesso! É só colocar a mão na massa agora!")
+        case 2:
+            if len(profissionais) == 0:
+                print("Não existem profissionais cadastrados! Equipe está vazia T-T")
+            else:
+                for p in profissionais:
+                    print("Nome:", p["nome"], "\n CPF:", p["cpf"], "\n Registro:", p["registro"], "\n Especialidade:", p["especialidade"], "\n Telefone:", p["telefone"], "\n E-mail:", p["email"], "\n Endereço:", p["endereco"]["rua"], "-", p["endereco"]["bairro"], "-", p["endereco"]["numero"])
+        case 3:
+            cpf_busca = input("Digite o CPF do profissional que deseja editar: ")
+            encontrado = False
+            for p in profissionais:
+                if p["cpf"] == cpf_busca:
+                    p["nome"] = input("Novo nome: ")
+                    p["registro"] = input("Novo registro: ")
+                    p["especialidade"] = input("Nova especialidade: ")
+                    p["telefone"] = input("Novo telefone: ")
+                    p["email"] = input("Novo e-mail: ")
+                    p["endereco"]["rua"] = input("Nova rua: ")
+                    p["endereco"]["bairro"] = input("Novo bairro: ")
+                    p["endereco"]["numero"] = input("Novo número: ")
+                    salvar_json()
+                    print("Profissional atualizado com sucesso! Dados tão novos como o sistema")
+                    encontrado = True
+            if not encontrado:
+                print("Profissional não encontrado!")
+        case 4:
+            cpf_busca = input("Digite o CPF do profissional que deseja pesquisar: ")
+            encontrado = False
+            for p in profissionais:
+                if p["cpf"] == cpf_busca:
+                    print("Nome:", p["nome"], "\n CPF:", p["cpf"], "\n Registro:", p["registro"], "\n Especialidade:", p["especialidade"], "\n Telefone:", p["telefone"], "\n E-mail:", p["email"], "\n Endereço:", p["endereco"]["rua"], "-", p["endereco"]["bairro"], "-", p["endereco"]["numero"])
+                    encontrado = True
+            if not encontrado:
+                print("Profissional não encontrado! Fantasma? Nem, provavel os dados forem inseridos errados.")
+        case 5:
+            cpf_busca = input("Digite o CPF do profissional que deseja excluir: ")
+            encontrado = False
+            for p in profissionais:
+                if p["cpf"] == cpf_busca:
+                    profissionais.remove(p)
+                    salvar_json()
+                    print("Profissional excluído com sucesso! -1 Na equipe :(")
+                    encontrado = True
+                    break
+            if not encontrado:
+                print("Profissional não encontrado!")
+        case 6:
+            print("\n=== Relatório de Profissionais ===")
+            print("Total de profissionais cadastrados:", len(profissionais))
+            for p in profissionais:
+                print("-", p["nome"], "|", p["especialidade"])
+        case 7:
+            print("Saindo... Calma lá")
             break
-        else:
-            print("Opção inválida, escolha outra opção.")
-
-menu()
-#não acredito q escrevi errado "ajeitando"
+        case _:
+            print("Opção inválida! Tente novamente por favor.")
